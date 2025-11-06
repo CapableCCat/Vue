@@ -4,7 +4,22 @@
         <ul>
             <!-- 注意避开new等JavaScript的关键字 -->
             <li v-for = "news in newsList">
-                <RouterLink to = "/news/detail?  ">{{ news.title }}</RouterLink>
+            <!-- 第一种写法 -->
+            <!-- <RouterLink :to = "`/news/detail?id = ${ news.id }&title = ${ news.title }&content = ${ news.content }`"></RouterLink> -->
+
+            <!-- 第二种写法 -->
+            <RouterLink
+                :to = "{
+                    path:'/news/detail',
+                    query: {
+                        id: news.id,
+                        title: news.title,
+                        content: news.content
+                    }
+                }"
+            >
+                {{ news.title }}
+            </RouterLink>
             </li>
         </ul>
         <!-- 详情页 -->
@@ -40,14 +55,14 @@
             id: "n04",
             title: "好消息！好消息！",
             content: "快过年了"
-        } 
+        }
     ])
 
     // 生命周期
     // 挂载完毕
     onMounted(() => {
         console.log("News挂载完毕")
-    }) 
+    })
 
     onUnmounted(() => {
         console.log("News卸载完毕")

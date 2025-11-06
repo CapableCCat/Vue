@@ -24,7 +24,11 @@ const router = createRouter({
             component: News,
             children: [
                 {
-                    path: 'detail',
+                    name: 'detail',
+                    path: 'detail/:id/:title/:content',
+                    // 如果不想传递某参数，可以在后面对应参数添加?
+                    // ?代表可传可不传
+                    // path: 'detail/:id/:title/:content?',
                     component: Detail
                 }
             ]
