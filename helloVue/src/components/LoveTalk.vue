@@ -2,7 +2,7 @@
     <div class = "talk">
         <button @click = "getLoveTalk">获取一句土味情话</button>
         <ul>
-            <li v-for = "talk in talkList" :key = "talk.id">
+            <li v-for = "talk in loveTalkStore.talkList" :key = "talk.id">
                 {{ talk.content }}
             </li>
         </ul>
@@ -10,24 +10,27 @@
 </template>
 
 <script setup lang = "ts">
-    import { reactive } from 'vue';
+    import { reactive, ref } from 'vue';
     import axios from 'axios';
     import { nanoid } from 'nanoid';
+    import { useTalkStore } from '@/store/loveTalk'
 
-    let talkList = reactive([
-        {
-            id: "t01",
-            content: "你今天有点怪，哪里怪？怪好看的。"
-        },
-        {
-            id: "t02",
-            content: "草莓、蓝莓、蔓越莓，今天想我了没？"
-        },
-        {
-            id: "t03",
-            content: "心里给你留了一块地，我的死心塌地。"
-        },
-    ])
+    const loveTalkStore = useTalkStore() 
+
+    // 测试
+    // let obj = reactive({
+    //     a: 1,
+    //     b: 2,
+    //     c: ref(3)
+    // }) 
+    // let x = ref(9)
+    // console.log(obj.a)
+    // console.log(obj.b)
+    // console.log(obj.c)
+
+    // console.log(x)
+    // console.log(x.value)
+
 
     // 方法
     async function getLoveTalk() {
@@ -42,7 +45,7 @@
             content
         }
         // 放到数组中
-        talkList.unshift(obj)
+        loveTalkStore.talkList.unshift(obj)
     }
 </script>
 
