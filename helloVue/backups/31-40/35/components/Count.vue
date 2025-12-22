@@ -15,7 +15,6 @@
 
 <script setup lang = "ts">
     import { ref } from 'vue';
-    import { storeToRefs } from 'pinia';
 
     // 引入useCountStore
     import { useCountStore } from '@/store/Count'
@@ -23,16 +22,31 @@
     // 得到一个专门保存Count相关的Store存储
     const countStore = useCountStore()
 
-    // storeToRefs只会关注store中包含的数据，不会对方法进行ref包裹
-    // toRefs会关注所有数据
-    const { sum, school, address } = storeToRefs(countStore) 
-
     // 数据
     let num = ref(1) // 用户选择的数字
 
     // 方法
     function add() {
-        countStore.increment(num.value)
+        // 第一种方法
+        // countStore.sum += num.value
+
+        // 第二种方法
+        // 在VueTool的时间线中显示三次修改
+        countStore.sum += 1
+
+        countStore.school = "天津中德应用技术大学"
+        countStore.address = "天津市津南区雅深路2号"
+
+        // 第三种方法
+        // 在VueTool的时间线中显示一次patch批量变更
+        // countStore.$patch({
+        //     sum: 888,
+        //     school: "天津中德应用技术大学",
+        //     address: "天津市津南区雅深路2号"
+        // })
+        
+        // 第四种方法
+        // countStore.increment(num.value)
     }
 
     function minus() {

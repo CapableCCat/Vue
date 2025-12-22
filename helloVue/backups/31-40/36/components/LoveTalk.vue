@@ -7,30 +7,19 @@
             </li>
         </ul>
     </div>
-    <br>
-    <h2>社团名称：{{ Club }}</h2>
-    <button @click = "changeName">更换名称</button>
 </template>
 
 <script setup lang = "ts">
     import { useTalkStore } from '@/store/loveTalk'
     import { storeToRefs } from 'pinia'
-    import { ref } from 'vue'
 
     const loveTalkStore = useTalkStore() 
 
     const { talkList } = storeToRefs(loveTalkStore)
 
-    // 数据
-    let Club = ref('TSGU-OSC')
-
     // 方法
     function getLoveTalk() {
         loveTalkStore.getATalk()
-    }
-
-    function changeName() {
-        Club.value = 'TSGU-OSC'
     }
 </script>
 
