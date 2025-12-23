@@ -21,13 +21,6 @@
 
     const { talkList } = storeToRefs(loveTalkStore)
 
-    // 可以使用this，但是官方推荐使用箭头函数
-    // mutate：记录本次修改信息
-    loveTalkStore.$subscribe((mutate, state)=>{
-        console.log("loveTalkStore里面保存的数据发生了变化", mutate, state)
-        // localStorage.setItem('talkList')
-    })
-
     // 数据
     let Club = ref('TSGU-OSC')
 
